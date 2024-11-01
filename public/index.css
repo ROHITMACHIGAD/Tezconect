@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F0F4F8; /* Light background */
+}
+
+.welcome-message h1 {
+    margin-bottom: 10px;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(-20px); /* Start slightly above */
+    animation: fadeInUp 1.5s forwards; /* Apply the animation */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1; /* Fully visible */
+        transform: translateY(0); /* Move to original position */
+    }
+}
+
+.card {
+    background-color: #DEE7E7; /* Card background */
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%; /* Full width for responsiveness */
+    max-width: 400px; /* Max width for the card */
+    margin: 20px auto; /* Center card with margin */
+    transition: transform 0.2s; /* Smooth scaling on hover */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
+.card-link {
+    text-decoration: none; /* Remove underline from link */
+    color: #333; /* Text color */
+    display: block; /* Make link a block element */
+    text-align: center; /* Center-align the text */
+}
+
+.arrow-button {
+    font-size: 24px; /* Larger font for the arrow */
+    display: inline-block; /* Inline block for proper spacing */
+    margin-top: 10px; /* Space above the arrow */
+}

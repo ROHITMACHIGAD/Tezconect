@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #DEE7E7; /* Olive green background */
+}
+
+.login-card {
+    background-color: rgba(244, 250, 255, 0.8); /* Semi-transparent background */
+    padding: 20px; /* Add some padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+    position: relative; /* Position relative to hold the ::before pseudo-element */
+    overflow: hidden; /* Ensures no content overflows the card */
+}
+
+.login-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/worker_signup\ \(2\).png'); /* Image as background */
+    background-size: contain; /* Ensure the entire image is visible */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image */
+    opacity: 0.95; /* Set opacity to 25% */
+    z-index: 1; /* Place the image behind the content */
+}
+
+.login-content {
+    position: relative;
+    z-index: 2; /* Ensure text and form appear above the background image */
+    color: black; /* Text color changed to black */
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    border: 1px solid #ddd; /* Adjust border color for visibility */
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #318CE7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px; /* Space above button */
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #6699CC;
+}
+
+p {
+    margin-top: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

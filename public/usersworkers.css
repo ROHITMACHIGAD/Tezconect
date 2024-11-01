@@ -1,0 +1,38 @@
+body {
+    background-color: #F0F4F8; /* Light background */
+}
+
+.card {
+    background-color: #DEE7E7; /* Card background */
+    border-radius: 15px;
+    transition: transform 0.2s; /* Smooth scaling on hover */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
+.action-button {
+    width: 100%; /* Full width for buttons */
+    font-size: 18px; /* Font size */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.action-button:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+h2 {
+    animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start invisible */
+        transform: translateY(-20px); /* Start slightly above */
+    }
+    to {
+        opacity: 1; /* Fully visible */
+        transform: translateY(0); /* End in original position */
+    }
+}

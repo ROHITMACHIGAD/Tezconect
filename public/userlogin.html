@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            min-height: 100vh;
+            background-color: #F0F4F8; /* Light background */
+            position: relative; /* For absolute positioning of footer */
+        }
+
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            color: white;
+            font-size: 28px; /* Increased font size */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position header at the top */
+            top: 0;
+        }
+
+        .login-card {
+            background-color: #DEE7E7; /* Cream background for the card */
+            padding: 20px; /* Added padding */
+            border-radius: 10px;
+            text-align: center;
+            width: 400px; /* Set width */
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            align-items: center; /* Center items horizontally */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            position: relative; /* Hold the ::before pseudo-element */
+            overflow: hidden; /* Ensures no content overflows the card */
+            margin-top: 80px; /* Space below header */
+            margin-bottom: 30px; /* Space above footer */
+        }
+
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../assets/user_login.png'); /* Image as background */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7; /* Set opacity */
+            z-index: 1; /* Place the image behind the content */
+        }
+
+        .login-content {
+            position: relative;
+            z-index: 2; /* Ensure text and form appear above the background image */
+            padding: 20px;
+            color: black; /* Text color changed to black */
+            width: 100%; /* Ensure content uses full width */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px;
+            transition: border 0.3s;
+            color: #333; /* Text color */
+            z-index: 2; /* Ensure the input is above the background */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            margin-bottom: 15px; /* Space between inputs */
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: rgba(0, 0, 0, 0.6); /* Placeholder text color */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Highlight border on focus */
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #318CE7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width for buttons */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        button:hover {
+            background-color: #6699CC; /* Change button color on hover */
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            margin-left: 10px; /* Adjust the value for desired spacing */
+            width: auto; /* Auto width for back button */
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            font-size: 16px; /* Increased font size for footer */
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="login-card">
+        <div class="login-content">
+            <h2>Login</h2>
+            <form method="POST" action="/ul" id="loginForm">
+                <input type="text" id="phno" name="phno" required placeholder="Enter phone number"><br>
+                <input type="password" id="password" name="password" required placeholder="Enter password"><br>
+                <button type="submit">Login</button>
+                <button type="button" class="back-button" onclick="window.history.back();">Back</button>
+            </form>
+            <p>Don't have an account? <a href="./usersignup.html">Sign up here</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

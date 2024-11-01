@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F0F4F8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 100px; /* Space for fixed header */
+            margin: 0; /* Reset default margin */
+            position: relative; /* For footer positioning */
+        }
+
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            width: 100%;
+            position: fixed; /* Fix the header to the top */
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            margin: 0; /* Remove default margin */
+            font-size: 28px; /* Increased font size for header */
+        }
+
+        .welcome-message {
+            text-align: center; /* Center the title */
+            margin-bottom: 20px; /* Space below the title */
+        }
+
+        .welcome-message h1 {
+            font-size: 4rem; /* Increased font size */
+            color: #2c3e50; /* Darker color for contrast */
+            opacity: 0; /* Initially hidden */
+            transform: translateY(-20px); /* Start slightly above */
+            animation: fadeInUp 1s forwards; /* Apply the animation */
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background-color: #DEE7E7; /* Card background */
+            padding: 30px; /* Internal spacing */
+            border-radius: 10px; /* Rounded corners */
+            width: 100%;
+            max-width: 350px; /* Increased max width for the card */
+            margin: 15px; /* Margin around each card */
+            transition: transform 0.2s; /* Smooth scaling on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+            text-align: center; /* Center the content */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Slightly enlarge the card on hover */
+        }
+
+        .card-link {
+            text-decoration: none; /* Remove underline from link */
+            color: #333; /* Text color */
+            display: block; /* Make link a block element */
+            font-size: 20px; /* Adjusted font size for visibility */
+            font-weight: bold; /* Bold text for emphasis */
+            margin-bottom: 10px; /* Space below the link */
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+            width: 100%;
+            font-size: 16px; /* Increased font size for footer */
+            margin-top: auto; /* Push footer to the bottom */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tezconet</h1>
+    </header>
+
+    <div class="container text-center" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="welcome-message">
+            <h1 id="welcomeText">Welcome to TezConnect!</h1>
+            <p>Are you a User or a Worker?</p>
+        </div>
+        <div class="card my-4">
+            <a href="users.html" class="card-link">
+                <h2>Users</h2>
+                <span class="arrow-button">→</span>
+            </a>
+        </div>
+        <div class="card my-4">
+            <a href="workers.html" class="card-link">
+                <h2>Workers</h2>
+                <span class="arrow-button">→</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tezconet. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Line-by-line animation for the welcome message
+        const welcomeText = document.getElementById('welcomeText');
+        const fullText = welcomeText.textContent;
+        welcomeText.textContent = '';
+        let index = 0;
+
+        function typeText() {
+            if (index < fullText.length) {
+                welcomeText.textContent += fullText.charAt(index);
+                index++;
+                setTimeout(typeText, 70); // Faster speed (70 ms per character)
+            }
+        }
+
+        window.onload = typeText; // Start typing animation on page load
+    </script>
+</body>
+</html>

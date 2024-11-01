@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F4F8; /* Body background color */
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Vertical layout */
+            height: 100vh; /* Full height */
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .container {
+            background-color: #DEE7E7; /* Card background color */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px; /* Maximum width for card */
+            width: 90%; /* Responsive width */
+            max-height: 70vh; /* Limit maximum height */
+            margin: 20px auto; /* Center the container */
+            overflow-y: auto; /* Allow scrolling within the container if needed */
+            flex-grow: 1; /* Allow container to grow */
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        table {
+            width: 100%; /* Full width for table */
+            border-collapse: collapse; /* Remove double borders */
+            margin-bottom: 20px; /* Space below the table */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Border for table cells */
+            padding: 10px; /* Padding for table cells */
+            text-align: left; /* Left align text */
+        }
+
+        th {
+            background-color: #007BFF; /* Header background color */
+            color: white; /* Header text color */
+        }
+
+        button {
+            background-color: #3498db; /* Button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Make button full width */
+            margin-top: 10px; /* Space above button */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .back-button {
+            margin: 20px auto; /* Center the back button */
+            width: 20%; /* Reduce width of back button */
+            background-color: #3498db; /* Back button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .success-animation {
+            display: none; /* Hide by default */
+            text-align: center;
+            margin: 20px auto;
+            background-color: white; /* White background for message */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute; /* Position it on top */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center it */
+            z-index: 10; /* Ensure it appears above other elements */
+        }
+
+        .checkmark {
+            width: 50px;
+            height: 50px;
+            margin-top: 10px;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b; /* Green color */
+            fill: #fff;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            stroke: #4bb71b; /* Ensure stroke color is green */
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+    <script>
+        function showSuccessAnimation(event) {
+            event.preventDefault(); // Prevent form submission
+            const form = event.target; // Get the form element
+            const successAnimation = document.querySelector('.success-animation');
+            successAnimation.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                successAnimation.style.display = 'none'; // Hide the message
+                form.submit(); // Submit the form after hiding the message
+            }, 1000); // Wait for 1 second before hiding
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1 style="color:white;">Tezconect</h1>
+    </header>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type of Job</th>
+                    <th>Timing</th>
+                    <th>Location</th>
+                    <th>Work Pay</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% jobs.forEach(job => { %>
+                    <tr>
+                        <td><%= job.typeofjob %></td>
+                        <td><%= job.timing %></td>
+                        <td><%= job.location %></td>
+                        <td><%= job.workpay %></td>
+                        <td>
+                            <form action="/apply" method="POST" onsubmit="showSuccessAnimation(event)">
+                                <input type="hidden" name="jobId" value="<%= job.id %>">
+                                <input type="hidden" name="userPhno" value="<%= userPhno %>">
+                                <button type="submit">Apply</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-animation">
+        <p>Applied successfully!</p>
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+    </div>
+
+    <button class="back-button" onclick="window.history.back()">Back</button> <!-- Back button -->
+
+    <footer>
+        <p>&copy; 2024 Job Application Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>

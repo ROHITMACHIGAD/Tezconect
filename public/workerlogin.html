@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="workerlogin.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+            background-color: #F0F4F8; /* Solid background color */
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black header */
+            color: white;
+            text-align: center;
+            padding: 15px; /* Reduced header height */
+            font-size: 28px; /* Increased header size */
+            width: 100%; /* Full width */
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black footer */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px; /* Increased footer size */
+            width: 100%; /* Full width */
+        }
+
+        .login-container {
+            flex: 1; /* Allow the container to grow */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .login-card {
+            position: relative; /* Position relative for child elements */
+            width: 400px; /* Increased width */
+            height: 400px; /* Increased height */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Hide overflow for the background image */
+            color: white; /* Text color for the card */
+        }
+
+        .login-card::before {
+            content: ""; /* Create a pseudo-element for the background */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./assets/worker_login.png') no-repeat center center; /* Background image */
+            background-size: cover; /* Cover the card */
+            opacity: 0.5; /* Reduced opacity for the background image */
+            z-index: 1; /* Place it below the content */
+        }
+
+        .login-content {
+            position: relative; /* Position relative for content layering */
+            z-index: 2; /* Place content above the background */
+            padding: 40px; /* Increased padding */
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Space between inputs */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for input fields */
+            color: #333; /* Dark text color for visibility */
+        }
+
+        button {
+            background-color: #3498db; /* Blue button */
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Full width button */
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .back-button {
+            background-color: grey; /* Transparent background */
+            color: white; /* White text */
+            border: 1px solid white; /* White border */
+            margin-top: 10px; /* Space above */
+            cursor: pointer; /* Pointer cursor */
+            padding: 10px; /* Padding */
+            width: 100%; /* Full width */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .back-button:hover {
+            background-color:darkgray; /* Light background on hover */
+        }
+
+        p {
+            margin-top: 15px; /* Space above the paragraph */
+        }
+
+        a {
+            color: #3498db; /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-content">
+                <h2>Login</h2>
+                <form method="POST" action="/wl" id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="phno" name="phno" required placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" required placeholder="Enter password">
+                    </div>
+                    <button type="submit">Login</button>
+                    <button type="button" class="back-button" onclick="window.history.back()">Back</button>
+                </form>
+                <p>Don't have an account? <a href="./workersignup.html">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+</body>
+</html>

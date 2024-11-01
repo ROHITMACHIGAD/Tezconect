@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #F0F4F8; /* Light background color */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+            position: relative; /* For absolute positioning of footer */
+        }
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            color: white;
+            font-size: 28px; /* Increased font size */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position header at the top */
+            top: 0;
+        }
+        .container {
+            flex: 1; /* Allow the container to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            padding: 80px 20px 30px; /* Space below header and above footer */
+        }
+        .header {
+            text-align: center; /* Center header text */
+            margin-bottom: 30px; /* Space below the header */
+        }
+        .dashboard-title {
+            animation: fadeIn 1s ease-in; /* Animation for the title */
+            font-size: 2.5rem; /* Increase font size for visibility */
+            color: #333; /* Dark color for contrast */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px); /* Start slightly above */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* End at normal position */
+            }
+        }
+        .card {
+            background-color: #DEE7E7; /* Card background color */
+            border: none; /* Remove card border */
+            width: 100%; /* Full width within column */
+            height: 250px; /* Set card height */
+            display: flex; /* Use Flexbox for centering */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            text-align: center; /* Center text */
+            margin-bottom: 20px; /* Space between cards */
+        }
+        .card-body {
+            display: flex; /* Use Flexbox */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            height: 100%; /* Full height of card */
+        }
+        .card-title {
+            font-weight: bold; /* Make titles bold */
+            margin-bottom: 20px; /* Space between title and button */
+        }
+        .btn {
+            background-color: #007bff; /* Custom button color */
+            color: white; /* Text color for the button */
+            width: 80%; /* Set buttons to 80% width of card */
+            height: 60px; /* Set button height */
+            font-size: 16px; /* Set font size */
+        }
+        .back-button {
+            background-color: #6c757d; /* Grey color for back button */
+            color: white; /* Text color for the back button */
+            width: 150px; /* Set width for back button */
+            margin-top: 20px; /* Space above back button */
+        }
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            font-size: 16px; /* Increased font size for footer */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+        }
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .card {
+                height: 230px; /* Adjust height for larger tablets */
+            }
+        }
+        @media (max-width: 992px) {
+            .card {
+                height: 200px; /* Adjust height for tablets */
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                height: 180px; /* Adjust height for mobile */
+            }
+            .btn {
+                font-size: 14px; /* Smaller button font on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="dashboard-title">User Dashboard</h1> <!-- Animated title -->
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Job Management</h5>
+                        <form method="POST" action="/postjob">
+                            <button type="submit" class="btn">Post Job</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Applicant Management</h5>
+                        <form method="POST" action="/listapplicants">
+                            <button type="submit" class="btn">View Applicants</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Finish Job & Feedback</h5>
+                        <form method="GET" action="/finish-job">
+                            <button type="submit" class="btn">Finish Job</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="containerr">
+            <button class="btn back-button" onclick="window.history.back();">Back</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

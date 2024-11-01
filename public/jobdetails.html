@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Categories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #F0F4F8; /* Light background color */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+            position: relative; /* For absolute positioning of footer */
+        }
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            color: white;
+            font-size: 28px; /* Increased font size */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position header at the top */
+            top: 0;
+        }
+        .container {
+            flex: 1; /* Allow the container to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            padding: 80px 20px 30px; /* Space below header and above footer */
+        }
+        .welcome-message {
+            text-align: center; /* Center the title */
+            margin-bottom: 20px; /* Space below the title */
+        }
+        .welcome-message h1 {
+            font-size: 4rem; /* Doubled font size */
+            opacity: 0; /* Initially hidden */
+            transform: translateY(-20px); /* Start slightly above */
+            animation: fadeIn 1.5s forwards; /* Apply the animation */
+            color: #2c3e50; /* Darker color for contrast */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px); /* Start slightly above */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* End at normal position */
+            }
+        }
+        .card {
+            background-color: #DEE7E7; /* Card background color */
+            border: none; /* Remove card border */
+            width: 100%; /* Full width within column */
+            height: 250px; /* Set card height */
+            display: flex; /* Use Flexbox for centering */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            text-align: center; /* Center text */
+            margin-bottom: 20px; /* Space between cards */
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Start below */
+            animation: fadeInUp 0.5s forwards; /* Apply the animation */
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Move to original position */
+            }
+        }
+        .card-body {
+            display: flex; /* Use Flexbox for centering content */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100%; /* Full height of the card body */
+        }
+        .btn {
+            background-color: #007bff; /* Custom button color */
+            color: white; /* Text color for the button */
+            width: 80%; /* Set buttons to 80% width of card */
+            height: 60px; /* Set button height */
+            font-size: 16px; /* Set font size */
+        }
+        .back-button {
+            background-color: #6c757d; /* Grey color for back button */
+            color: white; /* Text color for the back button */
+            width: 150px; /* Set width for back button */
+            margin-top: 20px; /* Space above back button */
+        }
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            font-size: 16px; /* Increased font size for footer */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+        }
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .card {
+                height: 230px; /* Adjust height for larger tablets */
+            }
+        }
+        @media (max-width: 992px) {
+            .card {
+                height: 200px; /* Adjust height for tablets */
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                height: 180px; /* Adjust height for mobile */
+                margin-bottom: 15px; /* Reduce space between cards on mobile */
+            }
+            .welcome-message h1 {
+                font-size: 2.5rem; /* Reduce title size on mobile */
+            }
+            .btn {
+                font-size: 14px; /* Smaller button font on mobile */
+            }
+            .back-button {
+                width: 100%; /* Make back button full width on mobile */
+            }
+        }
+        @media (max-width: 576px) {
+            header {
+                font-size: 24px; /* Smaller header size on very small screens */
+                padding: 20px; /* Reduce padding */
+            }
+            footer {
+                font-size: 14px; /* Smaller footer size on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="container">
+        <div class="welcome-message">
+            <h1>Available Job Categories</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <a href="./cleaners.html" class="card" style="animation-delay: 0.1s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Cleaners</h5>
+                        <button type="button" class="btn">View Cleaners</button>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="./hotel-workers.html" class="card" style="animation-delay: 0.2s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Workers</h5>
+                        <button type="button" class="btn">View Hotel Workers</button>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="./electricians.html" class="card" style="animation-delay: 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Electricians</h5>
+                        <button type="button" class="btn">View Electricians</button>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="./plumbers.html" class="card" style="animation-delay: 0.4s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Plumbers</h5>
+                        <button type="button" class="btn">View Plumbers</button>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="./car-washers.html" class="card" style="animation-delay: 0.5s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Car Washers</h5>
+                        <button type="button" class="btn">View Car Washers</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="containerr">
+            <button class="btn back-button" onclick="window.history.back();">Back</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

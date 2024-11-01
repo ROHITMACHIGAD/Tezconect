@@ -1,0 +1,55 @@
+<!-- feedback.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tezconect</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+    <div class="container">
+        <div class="feedback-card">
+            <h2>Rate Us</h2>
+            <div class="stars">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <form id="feedbackForm" method="POST" action="/submitfeedback">
+                <input type="hidden" id="rating" name="rating" value="0">
+                <input type="hidden" name="wkphno" value="<%= feedbackData.wkphno %>"> <!-- Assuming you use EJS -->
+                <textarea id="feedbackText" name="feedbackText" placeholder="Leave your feedback here..." rows="4"></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = star.getAttribute('data-value');
+                ratingInput.value = selectedRating; // Update hidden input
+                updateStars();
+            });
+        });
+
+        function updateStars() {
+            stars.forEach(star => {
+                if (star.getAttribute('data-value') <= selectedRating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

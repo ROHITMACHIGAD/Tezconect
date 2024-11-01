@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            min-height: 100vh;
+            background-color: #F0F4F8; /* Light background */
+            position: relative; /* For absolute positioning of footer */
+        }
+
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            color: white;
+            font-size: 28px; /* Increased font size */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position header at the top */
+            top: 0;
+        }
+
+        .login-card {
+            background-color: #DEE7E7; /* Cream background for the card */
+            padding: 20px; /* Added padding */
+            border-radius: 10px;
+            text-align: center;
+            width: 400px; /* Set width */
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            align-items: center; /* Center items horizontally */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            position: relative; /* Hold the ::before pseudo-element */
+            overflow: hidden; /* Ensures no content overflows the card */
+            margin-top: 80px; /* Space below header */
+            margin-bottom: 30px; /* Space above footer */
+        }
+
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../assets/user_signup.png'); /* Image as background */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6; /* Set opacity */
+            z-index: 1; /* Place the image behind the content */
+        }
+
+        .login-content {
+            position: relative;
+            z-index: 2; /* Ensure text and form appear above the background image */
+            padding: 20px;
+            color: black; /* Text color */
+            width: 100%; /* Ensure content uses full width */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Space between input fields */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px;
+            transition: border 0.3s;
+            color: #333; /* Text color */
+            z-index: 2; /* Ensure the input is above the background */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: rgba(0, 0, 0, 0.6); /* Placeholder text color */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Highlight border on focus */
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #318CE7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width for buttons */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        button:hover {
+            background-color: #6699CC; /* Change button color on hover */
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            font-size: 16px; /* Increased font size for footer */
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+        }
+
+        .success-animation {
+    display: none; /* Initially hidden */
+    text-align: center;
+    position: fixed; /* Fixed positioning */
+    top: 20%; /* Center vertically */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center horizontally */
+    z-index: 1000; /* Ensure it’s on top */
+    background-color: white; /* Set background to white */
+    padding: 20px; /* Add some padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+        .checkmark {
+            width: 60px; /* Smaller size */
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4bb71b;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+            margin: 0 auto; /* Center the SVG */
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b;
+            fill: #fff;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="success-animation" id="successAnimation">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <div>Sign-up successful</div>
+    </div>
+
+    <div class="login-card">
+        <div class="login-content">
+            <h2>User Sign Up</h2>
+            <form id="usersignup-form" method="POST">
+                <div class="form-group">
+                    <input type="text" id="usersignup-name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="usersignup-phno" name="phno" placeholder="Enter your phone number" required>
+                </div>
+                <button type="button" id="send-otp">Send OTP</button>
+            </form>
+            <div id="otp-section" style="display:none;">
+                <div class="form-group">
+                    <input type="text" id="usersignup-otp" placeholder="Enter OTP" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="usersignup-password" placeholder="Create a password" required>
+                </div>
+                <button id="verify-otp">Verify OTP and Sign Up</button>
+            </div>
+            <p>Already have an account? <a href="./userlogin.html">Login here</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('send-otp').addEventListener('click', async () => {
+            const phno = document.getElementById('usersignup-phno').value;
+
+            if (!/^\d{10}$/.test(phno)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            const response = await fetch('/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile: phno })
+            });
+
+            if (response.ok) {
+                document.getElementById('otp-section').style.display = 'block';
+            } else {
+                const errorMsg = await response.text();
+                alert(`Error sending OTP: ${errorMsg}`);
+            }
+        });
+
+        document.getElementById('verify-otp').addEventListener('click', async () => {
+            const mobile = document.getElementById('usersignup-phno').value;
+            const otp = document.getElementById('usersignup-otp').value;
+            const name = document.getElementById('usersignup-name').value;
+            const password = document.getElementById('usersignup-password').value;
+
+            const response = await fetch('/verify-signup-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile, otp, name, password })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById('successAnimation').style.display = 'block';
+                    setTimeout(() => {
+                        window.history.back(); // Go back to the previous page after 1.3 seconds
+                    }, 1300);
+                } else {
+                    alert('Invalid OTP. Please try again.');
+                }
+            } else {
+                const errorMsg = await response.text();
+                alert(`Error during sign-up: ${errorMsg}`);
+            }
+        });
+    </script>
+</body>
+</html>

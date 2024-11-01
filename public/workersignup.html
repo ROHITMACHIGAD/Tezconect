@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Sign Up</title>
+    <link rel="stylesheet" href="workersignup.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F0F4F8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 100px;
+            margin: 0;
+        }
+
+        header {
+            background-color: black;
+            padding: 30px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .success-animation {
+            display: none;
+            text-align: center;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4bb71b;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+            margin: 0 auto;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b;
+            fill: #fff;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .back-button {
+            background-color: #7d7d7d; /* Gray color */
+        }
+
+        .back-button:hover {
+            background-color: #6b6b6b; /* Darker gray on hover */
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: auto;
+            font-size: 16px;
+        }
+
+        .edit {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #otp-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tezconnect</h1>
+    </header>
+    <div class="edit">
+        <div class="success-animation" id="successAnimation">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+            <div>Sign-up successful</div>
+        </div>
+
+        <div class="login-card">
+            <div class="login-content">
+                <h2>Worker Sign Up</h2>
+                <form id="workersignup-form" method="POST">
+                    <div class="form-group">
+                        <input type="text" id="workersignup-name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="workersignup-phno" name="phno" placeholder="Enter your phone number" required>
+                    </div>
+                    <button type="button" id="send-otp">Send OTP</button>
+                </form>
+                <div id="otp-section" style="display:none;">
+                    <div class="form-group">
+                        <input type="text" id="workersignup-otp" placeholder="Enter OTP" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="workersignup-password" placeholder="Create a password" required>
+                    </div>
+                    <button id="verify-otp">Verify OTP and Sign Up</button>
+                </div>
+                <button class="back-button" id="back-button" onclick="window.history.back()">Back</button>
+                <p>Already have an account? <a href="./workerlogin.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Tezconnect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('send-otp').addEventListener('click', async () => {
+            const phno = document.getElementById('workersignup-phno').value;
+
+            const response = await fetch('/send-otp-to-worker', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile: phno })
+            });
+
+            if (response.ok) {
+                document.getElementById('otp-section').style.display = 'block';
+            } else {
+                alert('Error sending OTP. Please try again.');
+            }
+        });
+
+        document.getElementById('verify-otp').addEventListener('click', async () => {
+            const mobile = document.getElementById('workersignup-phno').value;
+            const otp = document.getElementById('workersignup-otp').value;
+            const name = document.getElementById('workersignup-name').value;
+            const password = document.getElementById('workersignup-password').value;
+
+            const response = await fetch('/verify-worker', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile, otp, name, password })
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                const animation = document.getElementById('successAnimation');
+                animation.style.display = 'block';
+                document.querySelector('.login-card').style.display = 'none';
+
+                setTimeout(() => {
+                    window.location.href = '/index.html'; // Redirect to login
+                }, 2000); // Redirect after 2 seconds
+            } else {
+                alert(result.message);
+            }
+        });
+    </script>
+</body>
+</html>

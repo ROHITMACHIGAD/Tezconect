@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details - Hotel Workers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F0F4F8;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Use full viewport height */
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        header {
+            background-color: black; /* Black header */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px; /* Header size */
+            width: 100%;
+        }
+
+        footer {
+            background-color: black; /* Black footer */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px; /* Footer size */
+            width: 100%;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            animation: fadeInUp 2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            background-color: #DEE7E7; /* Match the Cleaners card background color */
+            padding: 30px; /* Match the padding from Cleaners */
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%; /* Make it responsive */
+            margin: auto; /* Center horizontally */
+            margin-top: 50px; /* Adjust top margin for spacing */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically inside the container */
+            align-items: center; /* Center content horizontally inside the container */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%; /* Ensure full width of form elements */
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: block;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #3498db; /* Change border color on focus */
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db; /* Blue button */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .back-button {
+            background-color: #aaa; /* Grey color for back button */
+            color: #fff;
+            margin-top: 10px; /* Space between buttons */
+        }
+
+        .success-animation {
+            display: none; /* Initially hidden */
+            text-align: center;
+            position: fixed; /* Fixed positioning */
+            top: 20%; /* Space from top */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            z-index: 1000; /* Ensure it’s on top */
+            background-color: white; /* Set background to white */
+            padding: 20px; /* Add some padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        }
+
+        .checkmark {
+            width: 60px; /* Smaller size */
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4bb71b;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+            margin: 0 auto; /* Center the SVG */
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b;
+            fill: #fff;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .edi {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="edi">TezConnect</h1>
+    </header>
+
+    <div class="container">
+        <form class="job-form" method="POST" action="/submitjob" onsubmit="submitJob()">
+            <div class="form-group">
+                <div class="header">
+                    <h1>Job Details - Hotel Workers</h1>
+                </div>
+                <label for="job-type">Type of Job</label>
+                <input type="text" id="job-type" name="typeofjob" value="Hotel Workers" readonly required>
+            </div>
+            <div class="form-group">
+                <label for="timing">Timing</label>
+                <input type="text" id="timing" name="timing" placeholder="Enter job timing" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter job location" required>
+            </div>
+            <div class="form-group">
+                <label for="work-pay">Work Pay</label>
+                <input type="number" id="work-pay" name="workpay" placeholder="Enter pay amount" required>
+            </div>
+
+            <button type="submit">Submit Job</button>
+            <button type="button" class="back-button" onclick="window.history.back()">Back</button> <!-- Back button -->
+        </form>
+    </div>
+
+    <div class="success-animation" id="successAnimation">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <div>Submitted Successfully</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function submitJob() {
+            // Simulate a successful job submission
+            const animation = document.getElementById('successAnimation');
+            animation.style.display = 'block';
+
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                animation.style.display = 'none';
+                window.history.back(); // Redirects to the previous page
+            }, 2000); // Set to 2000 milliseconds for 2 seconds
+        }
+    </script>
+</body>
+</html>

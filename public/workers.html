@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #F0F4F8; /* Light background */
+            position: relative; /* For absolute positioning of footer */
+        }
+
+        header {
+            background-color: black;
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            color: white;
+            font-size: 28px; /* Increased font size */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position header at the top */
+            top: 0;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 80px; /* Space below header */
+        }
+
+        .card {
+            background-color: #DEE7E7; /* Cream background for the card */
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Internal spacing */
+        }
+
+        .action-button {
+            width: 100%; /* Full width buttons */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            width: 100%; /* Ensure full width */
+            position: absolute; /* Position footer at the bottom */
+            bottom: 0;
+        }
+
+        /* Animation for the title */
+        #workerPortalTitle {
+            opacity: 0;
+            transform: translateY(-20px); /* Start slightly above */
+            transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth transition */
+        }
+
+        #workerPortalTitle.show {
+            opacity: 1;
+            transform: translateY(0); /* Move to original position */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TezConnect</h1>
+    </header>
+
+    <div class="container">
+        <div class="card p-4">
+            <h2 id="workerPortalTitle" class="mb-4">Worker Portal</h2>
+            <div class="button-group">
+                <form method="POST" action="/workersignup">
+                    <button type="submit" class="action-button btn btn-primary">Sign Up</button>
+                </form>
+                <form method="POST" action="/workerlogin">
+                    <button type="submit" class="action-button btn btn-secondary">Login</button>
+                </form>
+                <button class="btn btn-light" onclick="window.history.back();">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Fade-in animation for the worker portal title
+        window.onload = function() {
+            const workerPortalTitle = document.getElementById('workerPortalTitle');
+            workerPortalTitle.classList.add('show'); // Add class to trigger animation
+        };
+    </script>
+</body>
+</html>

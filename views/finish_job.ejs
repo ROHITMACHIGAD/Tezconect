@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finish Jobs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            color: #333;
+            margin: 0;
+            height: 100vh; /* Full height */
+            display: flex;
+            flex-direction: column; /* Vertical layout */
+            align-items: center; /* Center everything horizontally */
+        }
+        header {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        footer {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .container {
+            flex: 1; /* Take available space */
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            padding-top: 60px; /* Space for fixed header */
+            padding-bottom: 60px; /* Space for fixed footer */
+            overflow-y: auto; /* Allow scrolling for content */
+            width: 100%; /* Full width for centering */
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px; /* Add margin for spacing */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%; /* Full width for cards */
+            max-width: 600px; /* Maximum width for centering */
+            margin: 0; /* Remove default margin */
+        }
+        li {
+            background: #DEE7E7; /* Background color for cards */
+            margin: 10px 0; /* Vertical margin for spacing */
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to the left */
+            width: 100%; /* Full width of the container */
+        }
+        strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: lightblue;
+        }
+        .back-button {
+            background-color: lightblue; /* Light blue background for back button */
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Space above the button */
+            display: block; /* Block to center it */
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #6699CC; /* Change color on hover */
+        }
+        p {
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color:white;">Tezconect</h1>
+    </header>
+
+    <div class="container">
+        <% if (jobs.length > 0) { %>
+            <ul>
+                <% jobs.forEach(job => { %>
+                    <li class="list-group-item">
+                        <strong>Type of Job:</strong> <%= job.typeofjob %><br>
+                        <strong>Timing:</strong> <%= job.timing %><br>
+                        <strong>Location:</strong> <%= job.location %><br>
+                        <strong>Work Pay:</strong> $<%= typeof job.workpay === 'number' ? job.workpay.toFixed(2) : 'N/A' %>
+                        <form action="/finishjob" method="POST" class="mt-3">
+                            <input type="hidden" name="jobId" value="<%= job.id %>">
+                            <input type="hidden" name="usphno" value="<%= job.usphno %>">
+                            <button type="submit" class="btn btn-success">Finish Job</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No jobs found for this user.</p>
+        <% } %>
+
+        <!-- Single Back Button below all jobs -->
+        <button class="back-button" onclick="window.history.back()">Back</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Job Application Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>

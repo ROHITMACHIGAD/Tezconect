@@ -1,0 +1,45 @@
+<!-- success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Successful</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #F0F4F8;
+            font-family: 'Arial', sans-serif;
+        }
+        .message {
+            text-align: center;
+        }
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <h1>Submitted Successfully</h1>
+        <p>Your job details have been submitted.</p>
+    </div>
+    
+    <script>
+        // Redirect back after 2 seconds
+        setTimeout(() => {
+            window.history.back();
+        }, 2000);
+    </script>
+</body>
+</html>

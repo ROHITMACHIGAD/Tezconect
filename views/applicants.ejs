@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants List</title>
+    <link rel="stylesheet" href="applicants.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            height: 100vh; /* Full height */
+            overflow: hidden; /* Prevent scrolling */
+        }
+        header, footer {
+            background-color: black; /* Dark gray for header/footer */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: absolute; /* Position fixed to top/bottom */
+            left: 0;
+            right: 0;
+        }
+        header {
+            top: 0; /* Fixed to the top */
+        }
+        footer {
+            bottom: 0; /* Fixed to the bottom */
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 60px auto; /* Centered with margin on top */
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            height: calc(100vh - 120px); /* Adjust for header and footer height */
+            overflow-y: auto; /* Scrollable area within the container */
+        }
+        .star {
+            font-size: 1.5em; /* Adjust size as needed */
+            color: gold; /* Color for filled stars */
+        }
+        button {
+            padding: 10px 16px;
+            background-color: #007bff; /* Bootstrap blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .back-button {
+            background-color: #6c757d; /* Gray color for back button */
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        thead {
+            background-color: #007bff; /* Header background color */
+            color: white;
+        }
+
+        /* Success Animation Styles */
+        .success-animation {
+            display: none; /* Initially hidden */
+            position: fixed; /* Fixed positioning */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust to center */
+            z-index: 999; /* Above other content */
+            text-align: center;
+            background-color: white; /* White background */
+            padding: 20px; /* Padding around the content */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+            fill: #fff;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color:white;">TezConnect</h1>
+    </header>
+    
+    <div class="container">
+        <h1>Applicants List</h1>
+        
+        <!-- Filter Dropdown -->
+        <form action="/listapplicants" method="POST" style="margin-bottom: 20px;">
+            <label for="filter">Filter by Rating:</label>
+            <select name="filter" id="filter">
+                <option value="highest">Highest to Lowest</option>
+                <option value="lowest">Lowest to Highest</option>
+            </select>
+            <button type="submit">Apply</button>
+        </form>
+                      
+        <% if (applicants.length === 0) { %>
+            <p>No applicants found.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type of Job</th>
+                        <th>Timing</th>
+                        <th>Work Pay</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% applicants.forEach((applicant) => { %>
+                        <tr>
+                            <td><%= applicant.typeofjob %></td>
+                            <td><%= applicant.timing %></td>
+                            <td><%= applicant.workpay %></td>
+                            <td><%= applicant.name %></td>
+                            <td>
+                                <% if (applicant.rating !== null) { %>
+                                    <div>
+                                        <% for (let i = 1; i <= 5; i++) { %>
+                                            <span class="star"><%= i <= applicant.rating ? '★' : '☆' %></span>
+                                        <% } %>
+                                    </div>
+                                <% } else { %>
+                                    <span>No rating</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <form action="/approve" method="POST" style="display: inline;" onsubmit="showSuccessAnimation(event)">
+                                    <input type="hidden" name="wkphno" value="<%= applicant.wkphno %>">
+                                    <button type="submit">Approve</button>
+                                </form>
+                                <form action="/reject" method="POST" style="display: inline;">
+                                    <input type="hidden" name="wkphno" value="<%= applicant.wkphno %>">
+                                    <button type="submit">Reject</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+
+        <!-- Back Button -->
+       <center><button class="back-button" onclick="window.history.back()">Back</button></center> 
+    </div>
+
+    <!-- Success Animation -->
+    <div class="success-animation">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <div class="success-message">Applicant Approved!</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TezConnect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSuccessAnimation(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const form = event.target; // Get the form element
+            const successAnimation = document.querySelector('.success-animation');
+
+            successAnimation.style.display = 'block'; // Show the animation
+
+            // Simulate a form submission using fetch API
+            fetch(form.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(form))
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Display success message for 1 second before hiding it
+                    setTimeout(() => {
+                        successAnimation.style.display = 'none'; // Hide animation
+                        window.history.back(); // Go back to previous page
+                    }, 1000);
+                } else {
+                    console.error('Error:', response);
+                    successAnimation.style.display = 'none'; // Hide on error
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                successAnimation.style.display = 'none'; // Hide on error
+            });
+        }
+    </script>
+</body>
+</html>
